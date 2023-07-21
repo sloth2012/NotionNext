@@ -2,17 +2,18 @@ import BLOG from '@/blog.config'
 import Link from 'next/link'
 import React from 'react'
 import TagItemMini from './TagItemMini'
-import CONFIG_MATERY from '../config_matery'
+import CONFIG from '../config'
 import TwikooCommentCount from '@/components/TwikooCommentCount'
+import LazyImage from '@/components/LazyImage'
 // import Image from 'next/image'
 
 const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
-  const showPreview = CONFIG_MATERY.POST_LIST_PREVIEW && post.blockMap
+  const showPreview = CONFIG.POST_LIST_PREVIEW && post.blockMap
   // matery 主题默认强制显示图片
   if (post && !post.pageCoverThumbnail) {
     post.pageCoverThumbnail = siteInfo?.pageCover
   }
-  const showPageCover = CONFIG_MATERY.POST_LIST_COVER && post?.pageCoverThumbnail
+  const showPageCover = CONFIG.POST_LIST_COVER && post?.pageCoverThumbnail
   const delay = (index % 3) * 300
   return (
         <div
@@ -32,7 +33,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
                         <div
                             className="flex flex-grow w-full relative duration-200 bg-black rounded-t-md  cursor-pointer transform overflow-hidden">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                            <LazyImage
                                 src={post?.pageCoverThumbnail}
                                 alt={post.title}
                                 className="opacity-50 h-full w-full hover:scale-125 rounded-t-md  transform object-cover duration-500"
